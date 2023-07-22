@@ -6,14 +6,14 @@ You are to implement the A* using both heuristics and compare their efficiency i
 
 ## Input requirements: 
 Your program should allow the instructor to either generate a random 8-puzzle problem or enter a specific 8-puzzle configuration through the standard input, which contains the configuration for only one puzzle, in the following format:
-1 2 4
-0 5 6
-8 3 7
+`1 2 4
+ 0 5 6
+ 8 3 7`
 
 The goal state is:
-0 1 2
-3 4 5
-6 7 8
+`0 1 2
+ 3 4 5
+ 6 7 8`
 Where 0 represents the empty tile.
 
-## How to run the code; Run from `Main.java`.
+###How to run the code: Run from `Main.java`.
