@@ -14,6 +14,7 @@ public class Node {
     private int exploredNodeSize = 0;
     private int searchCost = 0;
 
+    // Initialize variables
     public Node() {
         initialNode = new Integer[9];
         Arrays.fill(initialNode, -1);
@@ -23,6 +24,7 @@ public class Node {
         emptyNode = 0;
     }
 
+    // Constructor
     public Node(Integer[] init, Integer[] current, int g, String action, Node predecessor, int empty) {
         initialNode = init;
         currentNode = current;
@@ -36,7 +38,7 @@ public class Node {
         this(node.getInitialNode(), node.getCurrentNode(), node.getG(), node.getAction(), node.getPredecessor(), node.getEmptyNode());
     }
 
-    // Getter methods
+    // Getters 
     private int getEmptyNode() {
         return emptyNode;
     }
@@ -72,7 +74,7 @@ public class Node {
     public int getSearchCost() {
         return searchCost;
     }
-    // Setter methods
+    // Setters
     public void setFrontierNodeSize(int f) {
         frontierNodeSize = f;
     }

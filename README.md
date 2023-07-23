@@ -16,4 +16,4 @@ The goal state is:
  6 7 8`
 Where 0 represents the empty tile.
 
-###How to run the code: Run from `Main.java`.
+### How to run the code: Run from `Main.java`.

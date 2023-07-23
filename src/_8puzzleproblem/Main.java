@@ -5,13 +5,29 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
             Main ai = new Main();
-            int validInput = ai.getInputMethod();
-            switch (validInput) {
+            int choice;
+            Scanner kb = new Scanner(System.in);
+            System.out.println("CS 4200 Project 1\nSelect Input Method:\n[1] Random\n[2] Manual Input\n[3] Exit");
+            while (true) {
+                try {
+                    choice = Integer.parseInt(kb.nextLine());
+                    if (choice >= 1 && choice <= 3) {
+                        break;
+                    } else {
+                        System.out.println("Invalid option. Please try again.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid number.");
+                }
+            }   
+
+            switch (choice) {
                 case 1:
                     ai.randomPuzzle();
                     break;
                 case 2:
                     ai.manualInputPuzzle();
+                    System.out.println("manual");
                     break;
                 case 3:
                     System.exit(0);
@@ -24,46 +40,29 @@ public class Main {
     private AStar aStar = new AStar();
 
     /**
-     * Create a randomly generated puzzle
+     * Run AStar on a randomly generated puzzle
      */
     private void randomPuzzle() {
-
+        System.out.println("random");
+        Puzzle puzzle = new Puzzle();
+        Integer[] randomPuzzle = puzzle.generateRandomPuzzle();
+        System.out.println("Initial Puzzle:");
+        printPuzzle(randomPuzzle);
     }
 
     /**
-     * Create a puzzle based on user input
+     * Run AStar on user input
      */
     private void manualInputPuzzle() {
-
+       // Puzzle puzzle = new Puzzle();
     }
 
-    /**
-     * @return user input that has been checked for validity
-     * Gets the puzzle input method
-     */
-    private int getInputMethod() {
-        int validInput = 1;
-        String puzzleSelect = "CS 4200 Project 1\n";
-        puzzleSelect += "Select Input Method:\n";
-        puzzleSelect += "[1] Random\n[2] Manual Input\n[3] Exit";
-        
-        while (true) {
-            System.out.println(puzzleSelect);
-            Scanner kb = new Scanner(System.in);
-            String input = kb.nextLine();
-            try {
-                validInput = Integer.parseInt(input);
-                // Check if input is a valid option
-                if (validInput >= 1 && validInput <= 3) {
-                    break;
-                } else {
-                    System.out.println("Input is not a valid option");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Input is not a number. Please try again.");
+    public static void printPuzzle(Integer[] puzzle) {
+        for (int i = 0; i < 9; i++) {
+            System.out.print(puzzle[i] + " ");
+            if ((i + 1) % 3 == 0) {
+                System.out.println();
             }
         }
-        return validInput;
     }
-
 }
