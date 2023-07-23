@@ -44,6 +44,10 @@ public class Puzzle {
         initialPuzzle = puzzle;
     }
 
+    /**
+     * Generates a random puzzle with numbers 0-8 and ensures it is solvable. 
+     * @return An array of Integers representing the generated random puzzle with numbers 0 to 8
+     */
     public Integer[] generateRandomPuzzle() {
         List<Integer> numbers = Arrays.asList(0,1,2,3,4,5,6,7,8);
         Collections.shuffle(numbers);
@@ -115,6 +119,12 @@ public class Puzzle {
         }
     }
 
+    /**
+     * Checks if the given input array contains numbers from 0-8 without any repeats
+     * @param userInput An array of Integers representing the user input
+     * @return true if the input array is valid (contains numbers 0-8 without any repeats)
+     *         false otherwise
+     */
     private boolean isValidInput(Integer[] userInput) {
         // Check if input is an array
         if (userInput == null) {
@@ -140,7 +150,8 @@ public class Puzzle {
 
     /**
      * Method to check if a puzzle if solvable by checking the number of inversions
-     * @return true if number of inversions is an even number
+     * @return true if number of inversions is an even number, meaning it is solvable
+     *         false if number of inversions is odd
      */
     public static boolean checkIfSolvable(Integer[] puzzle) {
         int inversions = 0;
