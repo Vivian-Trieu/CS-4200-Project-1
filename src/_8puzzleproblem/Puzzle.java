@@ -2,7 +2,10 @@ package _8puzzleproblem;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class Puzzle {
     private Integer[] initialPuzzle = new Integer[9];
@@ -57,6 +60,82 @@ public class Puzzle {
         setInitialPuzzle(randomPuzzle);
         setInitialNode(new Node(randomPuzzle, randomPuzzle, 0, "no_op", null, emptyPosition));
         return randomPuzzle;
+    }
+
+    public Integer[] generateManualPuzzle() {
+        Scanner kb = new Scanner(System.in);
+        Integer[] userPuzzle = new Integer[9];
+        
+        System.out.println("Enter numbers from 0 to 8 (without repeats) in an array format (ex: 0, 1, 2, 3, 4, 5, 6, 7, 8):");
+
+        while (true) {
+            
+            String userInput = kb.nextLine();
+            String[] numbers = userInput.split(", ");
+            boolean validInput = true;
+
+            if (numbers.length != 9) {
+                System.out.println("Invalid input format. Please enter exactly 9 numbers separated by commas.");
+                continue;
+            }
+
+            for (int i = 0; i < numbers.length; i++) {
+                try {
+                    userPuzzle[i] = Integer.parseInt(numbers[i].trim());
+                    if (userPuzzle[i] < 0 || userPuzzle[i] > 8) {
+                        validInput = false;
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    validInput = false;
+                    break;
+                }
+            }
+
+            if (!validInput) {
+                System.out.println("Invalid input. Please enter valid numbers from 0 to 8.");
+                continue;
+            }
+
+            if (!isValidInput(userPuzzle)) {
+                System.out.println("Numbers should be unique with no repeats. Please try again.");
+                continue;
+            }
+
+            if (!checkIfSolvable(userPuzzle)) {
+                System.out.println("Puzzle is not solvable! Try again.");
+                continue;
+            }
+
+            emptyPosition = Arrays.asList(userPuzzle).indexOf(0);
+            setInitialPuzzle(userPuzzle);
+            setInitialNode(new Node(userPuzzle, userPuzzle, 0, "no_op", null, emptyPosition));
+            kb.close();
+            return userPuzzle;
+        }
+    }
+
+    private boolean isValidInput(Integer[] userInput) {
+        // Check if input is an array
+        if (userInput == null) {
+            return false;
+        }
+
+        // Check if numbers are between 0-8
+        for (int num : userInput) {
+            if (num < 0 || num > 8) {
+                return false;
+            }
+        }
+        // Check if number hasn't been used already
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : userInput) {
+            if (!numSet.add(num)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

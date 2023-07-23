@@ -27,7 +27,6 @@ public class Main {
                     break;
                 case 2:
                     ai.manualInputPuzzle();
-                    System.out.println("manual");
                     break;
                 case 3:
                     System.exit(0);
@@ -35,15 +34,16 @@ public class Main {
                 default:
                     break;
             }
+
+            kb.close();
     }
 
-    private AStar aStar = new AStar();
+    // private AStar aStar = new AStar();
 
     /**
      * Run AStar on a randomly generated puzzle
      */
     private void randomPuzzle() {
-        System.out.println("random");
         Puzzle puzzle = new Puzzle();
         Integer[] randomPuzzle = puzzle.generateRandomPuzzle();
         System.out.println("Initial Puzzle:");
@@ -54,7 +54,13 @@ public class Main {
      * Run AStar on user input
      */
     private void manualInputPuzzle() {
-       // Puzzle puzzle = new Puzzle();
+        Puzzle puzzle = new Puzzle();
+        Integer[] randomPuzzle = puzzle.generateManualPuzzle();
+        System.out.println("Initial Puzzle:");
+        printPuzzle(randomPuzzle);
+        int emptyPos = puzzle.getEmptyPosition();
+        System.out.println(emptyPos);
+
     }
 
     public static void printPuzzle(Integer[] puzzle) {
