@@ -32,6 +32,7 @@ public class AStar {
             }
 
             ArrayList<Node> successors = current.expandNode();
+            /*
             for (Node successor : successors) {
                 if (!explored.contains(successor)) {
                     searchCost++;
@@ -39,6 +40,16 @@ public class AStar {
                     successor.setExploredSize(explored.size());
                     successor.setFrontierSize(frontier.size());
                     frontier.add(successor);
+                }
+            } 
+            */
+            for (int i = 0; i < successors.size(); ++i) {
+                if (!explored.contains(successors.get(i))) {
+                    searchCost++;
+                    successors.get(i).setSearchCost(searchCost);
+                    successors.get(i).setExploredSize(explored.size());
+                    successors.get(i).setFrontierSize(frontier.size());
+                    frontier.add(successors.get(i));
                 }
             }
 

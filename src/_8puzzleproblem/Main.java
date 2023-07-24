@@ -48,6 +48,7 @@ public class Main {
         Integer[] randomPuzzle = puzzle.generateRandomPuzzle();
         System.out.println("Puzzle:");
         puzzle.printPuzzle(randomPuzzle);
+        System.out.println();
         Node init = puzzle.getInitialNode();
         
         System.out.println("Solving with H1: ");
@@ -78,6 +79,7 @@ public class Main {
         Integer[] manualPuzzle = puzzle.generateManualPuzzle();
         System.out.println("Puzzle:");
         puzzle.printPuzzle(manualPuzzle);
+        System.out.println();
         Node init = puzzle.getInitialNode();
         
         System.out.println("Solving with H1: ");
