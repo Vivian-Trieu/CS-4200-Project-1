@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Node {
-    private final Integer[] initialNode; // start
-    private final Integer[] currentNode;
+    private final Integer[] initialArray; // start
+    private final Integer[] currentArray;
     private final int g; // cost so far to reach n
     private final String action; // action taken
     private final int emptyNode; // empty node's position
     private Node predecessor;
-    private int frontierNodeSize = 0;
-    private int exploredNodeSize = 0;
+    private int frontierSize = 0;
+    private int exploredSize = 0;
     private int searchCost = 0;
 
     // Initialize variables
     public Node() {
-        initialNode = new Integer[9];
-        Arrays.fill(initialNode, -1);
-        currentNode = initialNode; // set the current node to initial node
+        initialArray = new Integer[9];
+        Arrays.fill(initialArray, -1);
+        currentArray = initialArray; // set the current node to initial node
         g = 0;
         action = "no_op";
         emptyNode = 0;
@@ -26,8 +26,8 @@ public class Node {
 
     // Constructor
     public Node(Integer[] init, Integer[] current, int g, String action, Node predecessor, int empty) {
-        initialNode = init;
-        currentNode = current;
+        initialArray = init;
+        currentArray = current;
         this.g = g;
         this.action = action;
         this.predecessor = predecessor;
@@ -35,52 +35,52 @@ public class Node {
     }
 
     public Node (Node node) {
-        this(node.getInitialNode(), node.getCurrentNode(), node.getG(), node.getAction(), node.getPredecessor(), node.getEmptyNode());
+        this(node.getInitialArray(), node.getCurrentArray(), node.getG(), node.getAction(), node.getPredecessor(), node.getEmptyNode());
     }
 
     // Getters 
-    private int getEmptyNode() {
+    public int getEmptyNode() {
         return emptyNode;
     }
 
-    private Node getPredecessor() {
+    public Node getPredecessor() {
         return predecessor;
     }
 
-    private String getAction() {
+    public String getAction() {
         return action;
     }
 
-    private int getG() {
+    public int getG() {
         return g;
     }
 
-    private Integer[] getCurrentNode() {
-        return currentNode;
+    public Integer[] getCurrentArray() {
+        return currentArray;
     }
 
-    private Integer[] getInitialNode() {
-        return initialNode;
+    public Integer[] getInitialArray() {
+        return initialArray;
     }
 
-    public int getFrontierNodeSize() {
-        return frontierNodeSize;
+    public int getFrontierSize() {
+        return frontierSize;
     }
 
-    public int getExploredNodeSize() {
-        return exploredNodeSize;
+    public int getExploredSize() {
+        return exploredSize;
     }
 
     public int getSearchCost() {
         return searchCost;
     }
     // Setters
-    public void setFrontierNodeSize(int f) {
-        frontierNodeSize = f;
+    public void setFrontierSize(int f) {
+        frontierSize = f;
     }
 
-    public void setExploredNodeSize(int e) {
-        exploredNodeSize = e;
+    public void setExploredSize(int e) {
+        exploredSize = e;
     }
 
     public void setSearchCost(int searchCost) {
@@ -102,8 +102,8 @@ public class Node {
      */
     public Node createNode(String action) {
         Node successorNode;
-        Integer[] newNode = Arrays.copyOf(currentNode, currentNode.length);
-        int rowSize = (int) Math.sqrt(currentNode.length);
+        Integer[] newNode = Arrays.copyOf(currentArray, currentArray.length);
+        int rowSize = (int) Math.sqrt(currentArray.length);
         int newRow = emptyNode / rowSize;
         int newCol = emptyNode % rowSize;
 
@@ -128,7 +128,7 @@ public class Node {
         newNode[emptyNode] = newNode[newPosition]; // Swap new child node with empty node
         newNode[newPosition] = 0;
 
-        successorNode = new Node(initialNode, newNode, g+1, action, this, newPosition);
+        successorNode = new Node(initialArray, newNode, g+1, action, this, newPosition);
         return successorNode;
     }
 
@@ -144,7 +144,7 @@ public class Node {
      *         false otherwise
      */
     public boolean checkInBounds (String action) {
-        int rowSize = (int) Math.sqrt(currentNode.length);
+        int rowSize = (int) Math.sqrt(currentArray.length);
         int row = emptyNode / rowSize;
         int col = emptyNode % rowSize;
 

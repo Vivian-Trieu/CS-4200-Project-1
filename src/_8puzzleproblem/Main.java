@@ -46,7 +46,7 @@ public class Main {
     private void randomPuzzle() {
         Puzzle puzzle = new Puzzle();
         Integer[] randomPuzzle = puzzle.generateRandomPuzzle();
-        System.out.println("Initial Puzzle:");
+        System.out.println("Puzzle:");
         printPuzzle(randomPuzzle);
     }
 
@@ -56,7 +56,7 @@ public class Main {
     private void manualInputPuzzle() {
         Puzzle puzzle = new Puzzle();
         Integer[] randomPuzzle = puzzle.generateManualPuzzle();
-        System.out.println("Initial Puzzle:");
+        System.out.println("Puzzle:");
         printPuzzle(randomPuzzle);
         int emptyPos = puzzle.getEmptyPosition();
         System.out.println(emptyPos);
