@@ -169,4 +169,16 @@ public class Puzzle {
         return inversions % 2 == 0;
     }
 
+        /**
+     * Print the puzzle in a 3x3 format.
+     * @param puzzle The puzzle to be printed.
+     */
+    public void printPuzzle(Integer[] puzzle) {
+        for (int i = 0; i < 9; i++) {
+            System.out.print(puzzle[i] + " ");
+            if ((i + 1) % 3 == 0) {
+                System.out.println();
+            }
+        }
+    }
 }

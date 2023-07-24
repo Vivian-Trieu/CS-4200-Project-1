@@ -9,10 +9,11 @@ public class AStar {
     private PriorityQueue<Node> frontier;
     private final Integer[] goal = {0, 1, 2, 3, 4, 5, 6, 7, 8};
     private HashSet<Node> explored;
-    int stepCounter = 0;
+    
 
     public Node runAStar(Node initialNode, boolean H1) {
         int searchCost = 0;
+        int stepCounter = 0;
         explored = new HashSet<>();
         frontier = new PriorityQueue<>((final Node o1, final Node o2) -> getHeuristic(o1, H1) - getHeuristic(o2, H1));
         
@@ -21,12 +22,13 @@ public class AStar {
             Node current = frontier.poll();
             explored.add(current);
 
-            System.out.println("Step" + stepCounter);
-            System.out.println(current);
+            System.out.println("Step: " + stepCounter);
+            new Puzzle().printPuzzle(current.getCurrentArray());
             System.out.println();
             
             if (Arrays.equals(current.getCurrentArray(), goal)) {
-                System.out.println("Search cost: " + searchCost);
+                System.out.println("Finished.\n");
+                return current;
             }
 
             ArrayList<Node> successors = current.expandNode();

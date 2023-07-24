@@ -38,7 +38,7 @@ public class Main {
             kb.close();
     }
 
-    // private AStar aStar = new AStar();
+    private AStar aStar = new AStar();
 
     /**
      * Run AStar on a randomly generated puzzle
@@ -47,7 +47,27 @@ public class Main {
         Puzzle puzzle = new Puzzle();
         Integer[] randomPuzzle = puzzle.generateRandomPuzzle();
         System.out.println("Puzzle:");
-        printPuzzle(randomPuzzle);
+        puzzle.printPuzzle(randomPuzzle);
+        Node init = puzzle.getInitialNode();
+        
+        System.out.println("Solving with H1: ");
+        long start1 = System.currentTimeMillis();
+        Node h1Result = aStar.runAStar(init, true);
+        long end1 = System.currentTimeMillis();
+        long total1 = end1 - start1;
+
+        System.out.println("Solving with H2: ");
+        long start2 = System.currentTimeMillis();
+        Node h2Result = aStar.runAStar(init, false);
+        long end2 = System.currentTimeMillis();
+        long total2 = end2 - start2;
+
+        System.out.println();
+        System.out.println("H1 Search Cost: " + h1Result.getSearchCost());
+        System.out.println("H1 Total Time: " + total1 + " ms\n");
+        System.out.println("H2 Search Cost: " + h2Result.getSearchCost());
+        System.out.println("H2 Search Cost: " + total2 + " ms\n");
+
     }
 
     /**
@@ -55,12 +75,28 @@ public class Main {
      */
     private void manualInputPuzzle() {
         Puzzle puzzle = new Puzzle();
-        Integer[] randomPuzzle = puzzle.generateManualPuzzle();
+        Integer[] manualPuzzle = puzzle.generateManualPuzzle();
         System.out.println("Puzzle:");
-        printPuzzle(randomPuzzle);
-        int emptyPos = puzzle.getEmptyPosition();
-        System.out.println(emptyPos);
+        puzzle.printPuzzle(manualPuzzle);
+        Node init = puzzle.getInitialNode();
+        
+        System.out.println("Solving with H1: ");
+        long start1 = System.currentTimeMillis();
+        Node h1Result = aStar.runAStar(init, true);
+        long end1 = System.currentTimeMillis();
+        long total1 = end1 - start1;
 
+        System.out.println("Solving with H2: ");
+        long start2 = System.currentTimeMillis();
+        Node h2Result = aStar.runAStar(init, false);
+        long end2 = System.currentTimeMillis();
+        long total2 = end2 - start2;
+
+        System.out.println();
+        System.out.println("H1 Search Cost: " + h1Result.getSearchCost());
+        System.out.println("H1 Total Time: " + total1 + " ms\n");
+        System.out.println("H2 Search Cost: " + h2Result.getSearchCost());
+        System.out.println("H2 Search Cost: " + total2 + " ms\n");
     }
 
     public static void printPuzzle(Integer[] puzzle) {
