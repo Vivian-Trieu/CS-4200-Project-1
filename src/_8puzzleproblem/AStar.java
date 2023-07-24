@@ -49,27 +49,52 @@ public class AStar {
         return node.getG() + (H1 ? misplacedTiles(node) : sumOfDistance(node));
     }
 
+    /**
+     * Calculates the number of misplaced tiles in the current state of the puzzle compared to the goal state. 
+     * A tile is misplaced if its value is not equal to its index position in the goal state.
+     * @param node The node representing the current puzzle state
+     * @return The total number of misplaced tiles in the current state
+     */
     private int misplacedTiles(Node node) {
         int numOfMisplacedTiles = 0;
+
+        // Iterate through the current state of the puzzle
         for (int i = 0; i < node.getCurrentArray().length; ++i) {
+
+            // Check if the value of the tile is not equal to its index position
             if (node.getCurrentArray()[i] != i) {
+
+                // If the tile is misplaced, increment the misplaced
                 numOfMisplacedTiles++;
             }
         }
         return numOfMisplacedTiles;
     }
 
+    /**
+     * Calculates the sum of the Manhattan distances of each tile from its goal position in the current state of the puzzle 
+     * The Manhattan distance is the sum of the horizontal & vertical distances between the current tile position and its goal position.
+     * @param node The node representing the current puzzle state
+     * @return The sum of the Manhattan distances of each tile from its goal position.
+     */
     private int sumOfDistance(Node node) {
         int sumOfDistance = 0;
+
+        // Iterate through the current state of the puzzle
         for (int i = 0; i < node.getCurrentArray().length; ++i) {
             int currentArray = node.getCurrentArray()[i];
+            // Skip the tile if it is the empty tile (0)
             if (currentArray == 0) {
                 continue;
             }
+
+            // Calculate the row and column of the current tile and its goal position
             int row = currentArray / 3;
             int col = currentArray % 3;
             int goalRow = i / 3;
             int goalCol = i % 3;
+
+            // Calculate the Manhattan distance and add it to the total sum
             sumOfDistance += Math.abs(col - goalCol) + Math.abs(row - goalRow);
         }
         return sumOfDistance;
