@@ -13,7 +13,8 @@ public class AStar {
 
     public Node runAStar(Node initialNode, boolean H1) {
         int searchCost = 0;
-        int stepCounter = 0;
+        // int stepCounter = 0;
+        // int previousG = 0;
         explored = new HashSet<>();
         frontier = new PriorityQueue<>((final Node o1, final Node o2) -> getHeuristic(o1, H1) - getHeuristic(o2, H1));
         
@@ -22,9 +23,15 @@ public class AStar {
             Node current = frontier.poll();
             explored.add(current);
 
-            System.out.println("Step: " + stepCounter);
+            // int currentG = current.getG();
+
+            System.out.println("Step Cost: " + current.getG());
             new Puzzle().printPuzzle(current.getCurrentArray());
             System.out.println();
+
+                // previousG = currentG;
+
+            
             
             if (Arrays.equals(current.getCurrentArray(), goal)) {
                 System.out.println("Finished.\n");
@@ -32,7 +39,7 @@ public class AStar {
             }
 
             ArrayList<Node> successors = current.expandNode();
-            /*
+            
             for (Node successor : successors) {
                 if (!explored.contains(successor)) {
                     searchCost++;
@@ -42,7 +49,8 @@ public class AStar {
                     frontier.add(successor);
                 }
             } 
-            */
+            
+            /* 
             for (int i = 0; i < successors.size(); ++i) {
                 if (!explored.contains(successors.get(i))) {
                     searchCost++;
@@ -52,8 +60,9 @@ public class AStar {
                     frontier.add(successors.get(i));
                 }
             }
+            */
 
-            stepCounter++;
+            // stepCounter++;
         }
         return null;
     }
@@ -68,7 +77,7 @@ public class AStar {
      * @param node The node representing the current puzzle state
      * @return The total number of misplaced tiles in the current state
      */
-    private int misplacedTiles(Node node) {
+    public int misplacedTiles(Node node) {
         int numOfMisplacedTiles = 0;
 
         // Iterate through the current state of the puzzle
@@ -90,20 +99,23 @@ public class AStar {
      * @param node The node representing the current puzzle state
      * @return The sum of the Manhattan distances of each tile from its goal position.
      */
-    private int sumOfDistance(Node node) {
+    public int sumOfDistance(Node node) {
         int sumOfDistance = 0;
 
         // Iterate through the current state of the puzzle
         for (int i = 0; i < node.getCurrentArray().length; ++i) {
-            int currentArray = node.getCurrentArray()[i];
+            // int currentArray = node.getCurrentArray()[i];
             // Skip the tile if it is the empty tile (0)
-            if (currentArray == 0) {
+            if (node.getCurrentArray()[i] == i) {
+                continue;
+            }
+            if (node.getCurrentArray()[i] == 0) {
                 continue;
             }
 
             // Calculate the row and column of the current tile and its goal position
-            int row = currentArray / 3;
-            int col = currentArray % 3;
+            int row = node.getCurrentArray()[i] / 3;
+            int col = node.getCurrentArray()[i] % 3;
             int goalRow = i / 3;
             int goalCol = i % 3;
 

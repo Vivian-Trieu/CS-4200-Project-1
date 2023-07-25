@@ -68,7 +68,7 @@ public class Main {
         System.out.println("H1 Total Time: " + total1 + " ms\n");
         System.out.println("H2 Search Cost: " + h2Result.getSearchCost());
         System.out.println("H2 Search Cost: " + total2 + " ms\n");
-
+        
     }
 
     /**
@@ -95,8 +95,10 @@ public class Main {
         long total2 = end2 - start2;
 
         System.out.println();
+        System.out.println("H1 Depth: " + h1Result.getG());
         System.out.println("H1 Search Cost: " + h1Result.getSearchCost());
         System.out.println("H1 Total Time: " + total1 + " ms\n");
+        System.out.println("H2 Depth: " + h2Result.getG());
         System.out.println("H2 Search Cost: " + h2Result.getSearchCost());
         System.out.println("H2 Search Cost: " + total2 + " ms\n");
     }

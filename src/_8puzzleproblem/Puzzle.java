@@ -70,12 +70,12 @@ public class Puzzle {
         Scanner kb = new Scanner(System.in);
         Integer[] userPuzzle = new Integer[9];
         
-        System.out.println("Enter numbers from 0 to 8 (without repeats) in an array format (ex: 0, 1, 2, 3, 4, 5, 6, 7, 8):");
+        System.out.println("Enter numbers from 0 to 8 (without repeats) in an array format (ex: 0 1 2 3 4 5 6 7 8):");
 
         while (true) {
             
             String userInput = kb.nextLine();
-            String[] numbers = userInput.split(", ");
+            String[] numbers = userInput.split(" ");
             boolean validInput = true;
 
             if (numbers.length != 9) {
