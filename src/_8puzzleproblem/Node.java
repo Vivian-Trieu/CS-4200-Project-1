@@ -95,8 +95,6 @@ public class Node {
      * row0   0    1    2
      * row1   3    4    5
      * row2   6    7    8
-     * Representation of the puzzle board as a 1D array corresponding to the matrix's positions:
-     * {0, 1, 2, 3, 4, 5, 6, 7, 8}
      * @param action The action applied to the current node
      * @return Child node object which is the node after the specified action
      */
